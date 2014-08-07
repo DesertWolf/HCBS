@@ -1,12 +1,13 @@
 {
-    "name": "HCBS",
-    "description": "HCBS web app",
-    "version": "0.0.1",
-    "main": "server.js",
-    "dependencies": {
-        "express": "~4.0.0",
-        "morgan": "~1.0.0",
-        "body-parser": "~1.0.0",
-        "method-override": "~1.0.0"
-    }
+  "name": "HCBS",
+  "description": "HCBS web app",
+  "version": "0.0.1",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "express": "~4.0.0",
+    "hbs": "^2.7.0",
+    "method-override": "~1.0.0",
+    "morgan": "~1.0.0"
+  }
 }

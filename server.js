@@ -2,6 +2,7 @@
  * Created by jamesf on 8/7/14.
  */
 var express        = require('express');
+var hbs            = require('hbs');
 var morgan         = require('morgan');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
@@ -12,8 +13,11 @@ app.use(morgan('dev')); 					// log every request to the console
 app.use(bodyParser()); 						// pull information from html in POST
 app.use(methodOverride()); 					// simulate DELETE and PUT
 
+app.set('view engine', 'html');
+app.engine('html', require('hbs').__express);
+
 app.get('/', function(req, res){
-    res.send('Welcome to HCBS Webapp');
+    res.render('index', {title:'Welcome to HCBS Webapp'});
 });
 
 app.listen(8081);
