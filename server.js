@@ -20,6 +20,7 @@ app.use(methodOverride()); 					// simulate DELETE and PUT
 
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+-app.set('port', process.env.PORT || 8081);
 
 hbs.registerPartials('views/partials');
 
