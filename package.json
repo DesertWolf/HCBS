@@ -6,8 +6,10 @@
   "dependencies": {
     "body-parser": "~1.0.0",
     "express": "~4.0.0",
+    "geocoder": "^0.2.0",
     "hbs": "^2.7.0",
     "method-override": "~1.0.0",
-    "morgan": "~1.0.0"
+    "morgan": "~1.0.0",
+    "parse": "^1.2.19"
   }
 }
