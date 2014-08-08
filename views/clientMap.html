@@ -6,6 +6,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="js/gmaps/gmaps.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/mapStyle.css">
 </head>
 <body id="home">
@@ -18,6 +20,37 @@
      </div>
     <div id="map" class="large"></div>
 </div>
+<script>
+    var clients =  {{{clients}}};
+    var lat = {{lat}};
+    var lng = {{lng}};
+    var map;
+    var miles = 35;
 
+    map = new GMaps({
+        div: '#map',
+        lat: lat,
+        lng: lng
+    });
+    map.addMarker({
+        lat: lat,
+        lng: lng,
+        title: 'Your Location',
+        infoWindow: {
+            content: '<p>Your Location</p>'
+        }
+    }); //end of map initialize
+    // place client markers
+    for (i = 0; i <clients.length; i++) {
+        map.addMarker({lat: clients[i].lat,
+            lng: clients[i].lng,
+            infoWindow:{
+                content:'<span> '+clients[i].gender+', '+clients[i].age+', '+clients[i].service+', '+clients[i].times+'</span>'
+
+            }
+        });
+
+    }
+</script>
 </body>
 </html>
