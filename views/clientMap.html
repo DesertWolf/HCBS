@@ -21,17 +21,43 @@
      </div>
     <div id="map" class="large"></div>
 </div>
+
+    <div class="table-responsive">
+<table class="table">
+    <caption><h2>Clients in your search area</h2></caption>
+
+    <thead>
+    <tr><th>Marker #</th><th>Age</th><th>Gender</th><th>Services</th><th>Times</th></tr>
+    </thead>
+    <tbody>
+    {{#each clientsData}}
+      <tr>
+          <td>{{inc @index}}</td>
+          <td>{{age}}</td>
+          <td>{{gender}}</td>
+          <td>{{service}}</td>
+          <td>{{times}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+
+</table>
+    </div>
+
 <script>
-    var clients =  {{{clients}}};
+    var clientsInfo =  {{{clients}}};
     var lat = {{lat}};
     var lng = {{lng}};
     var map;
-    var miles = 35;
+    var miles = {{miles}};
+    var radius = radiusToZoom(miles);
+
 
     map = new GMaps({
         div: '#map',
         lat: lat,
-        lng: lng
+        lng: lng,
+        zoom: radius
     });
     map.addMarker({
         lat: lat,
@@ -43,16 +69,20 @@
         icon: 'images/mapIcons/home.png'
     }); //end of map initialize
     // place client markers
-    for (i = 0; i <clients.length; i++) {
-        map.addMarker({lat: clients[i].lat,
-            lng: clients[i].lng,
+    for (i = 0; i <clientsInfo.length; i++) {
+        map.addMarker({lat: clientsInfo[i].lat,
+            lng: clientsInfo[i].lng,
             infoWindow:{
-                content:'<span> '+clients[i].gender+', '+clients[i].age+', '+clients[i].service+', '+clients[i].times+'</span>'
+                content:'<span> '+clientsInfo[i].gender+', '+clientsInfo[i].age+', '+clientsInfo[i].service+', '+clientsInfo[i].times+'</span>'
 
             },
             icon: 'images/mapIcons/number_'+(i+1)+'.png'
         });
 
+    }
+
+    function radiusToZoom(radius){
+        return Math.round(16-Math.log(radius)/Math.LN2);
     }
 </script>
 </body>

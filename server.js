@@ -24,6 +24,11 @@ app.engine('html', require('hbs').__express);
 
 hbs.registerPartials('views/partials');
 
+hbs.registerHelper("inc", function(value, options)
+{
+    return parseInt(value) + 1;
+});
+
 app.get('/', function(req, res){
     res.render('index', {title:'Welcome to HCBS Webapp'});
 });
@@ -42,6 +47,7 @@ app.post('/clientMap', function(req, res){
     var clientGeolocation = new ClientGeolocation;
     var point = new Parse.GeoPoint();
     var clientsLoc;
+    var miles;
 
 
     geocoder.geocode(address, function(err, data) {
@@ -76,10 +82,12 @@ app.post('/clientMap', function(req, res){
 
 
         // console.log("here: " + clientsLoc);
-        res.render('clientMap', {title: "Client Map Data",lat: lat, lng:lng, clients: clientsLoc});
+        res.render('clientMap', {title: "Client Map Data",lat: lat, lng:lng, clients: clientsLoc, clientsData: JSON.parse(clientsLoc), miles: miles});
     }
 
 });
+
+
 
 
 
